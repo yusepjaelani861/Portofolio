@@ -13,7 +13,7 @@ import Navbar from './Navbar.vue';
                 <slot />
             </main>
 
-            <footer class="text-lg pt-10 mt-10 border-t-2 mb-5 p-4 text-center">
+            <footer class="text-lg pt-5 border-t-2 mb-5 p-4 text-center">
                 Copyright © 2022 - All right reserved by Yusep Jaelani ~ Built With
                 <span class="text-red-500"><a href="https://laravel.com/">Laravel</a></span>
             </footer>

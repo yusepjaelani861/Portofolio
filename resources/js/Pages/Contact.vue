@@ -19,7 +19,7 @@ import Content from '@/Components/Content.vue';
             <a href="https://t.me/yusepjaelani" target="_blank" class="flex flex-col grow items-center p-5 m-2 card bg-base-100 hover:bg-gray-900 hover:text-white shadow-lg border rounded-lg cursor-pointer ">
                 <img src="/images/telegram.png" class="w-24 h-24 mb-4 text-white bg-white rounded-xl p-2" />
                 <span class="font-bold text-3xl mb-2">Telegram</span>
-                <span class=" text-md">+62 895-3899-25850</span>
+                <span class=" text-md">@yusepjaelani</span>
             </a>
 
             <a href="mailto:yusepjaelani861@gmail.com" target="_blank" class="flex flex-col grow items-center p-5 m-2 card bg-base-100 hover:bg-gray-900 hover:text-white shadow-lg border rounded-lg cursor-pointer ">
