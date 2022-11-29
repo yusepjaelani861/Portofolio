@@ -1,7 +1,27 @@
 <script setup>
 import Content from '@/Components/Content.vue';
+import axios from 'axios';
 
 
+</script>
+
+<script>
+export default {
+    data() {
+        return {
+            projects: [],
+        }
+    },
+    mounted() {
+        axios.get('/api/v1/home')
+            .then(res => {
+                this.projects = res.data.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
 </script>
 
 <template>
@@ -25,8 +45,7 @@ import Content from '@/Components/Content.vue';
                     class="bg-[#EFFFFA] hover:text-[#EFFFFA] hover:bg-gray-900 text-gray-900 font-bold py-2 px-4 rounded-full mt-4">
                     Contact Me
                 </a>
-                <a href="/attachments/portofolio-yusep-jaelani.pdf"
-                    class="flex items-center">
+                <a href="/attachments/portofolio-yusep-jaelani.pdf" class="flex items-center">
                     <p class="underline text-gray-900 font-bold py-2 px-4 rounded-full mt-4 ml-4 pb-2 mr-2">
                         Download CV
                     </p>
@@ -50,29 +69,26 @@ import Content from '@/Components/Content.vue';
                 </a>
             </div>
 
-            <div class="overflow-x-auto flex">
-                <div v-for="i in 4" :key="i" class="flex flex-nowrap mr-6 mb-4">
+            <div v-if="projects.length > 0" class="overflow-x-auto flex">
+                <div v-for="project in projects" :key="project.id" class="flex flex-nowrap mr-6 mb-4">
                     <div class="w-72 rounded-xl">
                         <div class="p-4">
                             <h1 class="text-2xl font-bold text-gray-900 mb-2">
-                                My Portfolio
+                                {{ project.name }}
                             </h1>
-                            <div class="flex">
-                                <div class="bg-[#0EA5E9] rounded-full p-1 px-4 text-white font-semibold mr-2">VueJS
-                                </div>
-                                <div class="bg-[#0EA5E9] rounded-full p-1 px-4 text-white font-semibold mr-2">PHP
+                            <div class="flex overflow-x-auto">
+                                <div v-for="tag in project.tags" :key="tag.id"
+                                    class="bg-[#0EA5E9] rounded-full p-1 px-4 text-white font-semibold mr-2">{{ tag.name
+                                    }}
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full overflow-hidden">
-                            <img class="object-cover w-full h-full rounded-xl border shadow-sm" src="/images/linku.png"
+                        <div class="w-full overflow-hidden p-4">
+                            <img class="object-cover w-full h-full rounded-xl border shadow-sm" :src="project.thumbnail"
                                 alt="">
                         </div>
                         <div class="flex items-center">
-                            <a href="#" class="underline text-gray-900 text-lg font-bold p-2 rounded-full">
-                                Github
-                            </a>
-                            <a href="https://linku.to"
+                            <a :href="'https://' + project.url"
                                 class="underline text-gray-900 text-lg font-bold p-2 rounded-full mr-2">
                                 Visit
                             </a>
@@ -113,7 +129,7 @@ import Content from '@/Components/Content.vue';
                         projects.
                     </p>
                     <h1 class="text-3xl font-bold mb-4">Skills</h1>
-                    <div class="flex overflow-x-auto">
+                    <div class="grid md:grid-cols-5 grid-cols-3 overflow-auto">
                         <div class="mr-2">
                             <svg class="w-24 h-24" viewBox="0 0 144 143" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_dd_502_1409)">
@@ -257,6 +273,20 @@ import Content from '@/Components/Content.vue';
 
                         <div class="mr-2">
                             <div class="bg-white rounded-lg w-24 h-24 flex items-center justify-center">
+                                <img src="/images/expressjs.png" class="w-20 h-20" />
+                            </div>
+                            <p class="text-gray-900 font-bold text-2xl text-center">Express</p>
+                        </div>
+
+                        <div class="mr-2">
+                            <div class="bg-white rounded-lg w-24 h-24 flex items-center justify-center">
+                                <img src="/images/nextjs.png" class="w-20 h-20" />
+                            </div>
+                            <p class="text-gray-900 font-bold text-2xl text-center">NextJS</p>
+                        </div>
+
+                        <div class="mr-2">
+                            <div class="bg-white rounded-lg w-24 h-24 flex items-center justify-center">
                                 <img src="/images/laravel.png" class="w-20 h-20" />
                             </div>
                             <p class="text-gray-900 font-bold text-2xl text-center">Laravel</p>
@@ -267,6 +297,20 @@ import Content from '@/Components/Content.vue';
                                 <img src="/images/vuejs.png" class="w-20 h-20" />
                             </div>
                             <p class="text-gray-900 font-bold text-2xl text-center">Vue.js</p>
+                        </div>
+
+                        <div class="mr-2">
+                            <div class="bg-white rounded-lg w-24 h-24 flex items-center justify-center">
+                                <img src="/images/nuxtjs.png" class="w-20 h-20" />
+                            </div>
+                            <p class="text-gray-900 font-bold text-2xl text-center">Nuxt.js</p>
+                        </div>
+
+                        <div class="mr-2">
+                            <div class="bg-white rounded-lg w-24 h-24 flex items-center justify-center">
+                                <img src="/images/mongodb.png" class="w-20 h-20" />
+                            </div>
+                            <p class="text-gray-900 font-bold text-2xl text-center">MongoDB</p>
                         </div>
 
                         <div class="mr-2">
@@ -284,7 +328,7 @@ import Content from '@/Components/Content.vue';
             </div>
         </div>
 
-        <div class="bg-gray-900 rounded-t-xl p-8">
+        <div class="bg-gray-900 rounded-xl p-8">
             <div class="flex">
                 <div class="w-full md:w-1/2">
                     <h1 class="text-6xl text-white font-bold mb-4">Do you have any idea?</h1>
